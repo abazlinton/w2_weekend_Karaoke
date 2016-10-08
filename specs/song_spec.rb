@@ -19,8 +19,15 @@ class TestSong < Minitest::Test
 		assert_equal("David Bowie", @song.artist)
 	end
 
-	def test_can_download_sample
+	def test_can_get_second_song
+		@song2 = Song.new(name: "Wonderwall")
+		assert_equal("Oasis", @song2.artist)
+	end
 
+	def test_can_download_sample
+		@song.download_sample
+		found = File.exists?(@song.file)
+		assert_equal(true, found)
 	end
 
 	def test_failed_download_handled

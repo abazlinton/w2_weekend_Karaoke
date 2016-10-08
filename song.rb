@@ -1,7 +1,7 @@
 require 'curb'
 class Song
 	
-	attr_reader :name, :spotify_id, :artist, :spotify_track_matches, :year
+	attr_reader :name, :spotify_id, :artist, :year, :file
 
 	def initialize(params)	
 		@name = {orig: params[:name], spotify: nil}
@@ -9,29 +9,28 @@ class Song
 	end
 
 	def convert_song_to_spotify_track
-		@spotify_track_matches = spotify_search(name[:orig])
-		@top_hit = @spotify_track_matches[0]
+		@top_hit = get_spotify_details()[0]
 		@spotify_id = @top_hit.id
 		@name[:spotify] = @top_hit.name
 		@artist = @top_hit.artists[0].name
 		@year = get_year()
+		@file = "../mp3/" + @spotify_id + ".mp3"
 	end	
 		
 	def download_sample
-		setup_folders
-		@file = "../mp3/" + @spotify_id + ".mp3" 
+		setup_folders 
 		if !File.exists?(@file)
 			curl_result = Curl::Easy.download(@top_hit.preview_url, @file)
 		end
 	end
 
 	def play_sample
-		download_sample
-		fork{ exec 'afplay', @file }
+		download_sample if !File.exists?(@file)
+		fork{ exec 'afplay','-t', '5', @file }
 	end
 
-	def spotify_search(name)
-		return RSpotify::Track.search(name, limit:1, offset: 0, market: nil)
+	def get_spotify_details()
+		return RSpotify::Track.search(name[:orig], limit:1, offset: 0, market: nil)
 	end
 
 	def get_year
