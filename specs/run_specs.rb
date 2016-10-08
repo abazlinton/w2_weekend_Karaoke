@@ -1,3 +1,5 @@
+#Craig Morton's spec runner - https://github.com/CraigMorton/ruby_specs_runner
+
 require "find"
 
 def in_specs_dir?
