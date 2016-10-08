@@ -41,9 +41,6 @@ class TestSong < Minitest::Test
 		location = Dir.pwd.split("Karaoke").last
 		assert_equal("/mp3", location)	
 	end
-
-
-
 end
 			
 		
