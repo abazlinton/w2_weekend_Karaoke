@@ -26,7 +26,7 @@ class Song
 
 	def play_sample
 		download_sample if !File.exists?(@file)
-		fork{ exec 'afplay','-t', '5', @file }
+		fork{ exec 'afplay','-t', '30', @file }
 	end
 
 	def get_spotify_details()
