@@ -31,7 +31,7 @@ class Song
 	end
 
 	def spotify_search(name)
-		return RSpotify::Track.search(name, limit:10, offset: 0, market: nil)
+		return RSpotify::Track.search(name, limit:1, offset: 0, market: nil)
 	end
 
 	def get_year
