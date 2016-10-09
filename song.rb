@@ -1,11 +1,12 @@
 require 'curb'
+require 'rspotify'	
 class Song
 	
 	attr_reader :name, :spotify_id, :artist, :year, :file
 
 	def initialize(params)	
 		@name = {orig: params[:name], spotify: nil}
-		convert_song_to_spotify_track
+		# convert_song_to_spotify_track
 	end
 
 	def convert_song_to_spotify_track

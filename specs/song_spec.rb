@@ -2,7 +2,6 @@ require 'minitest/autorun'
 require 'minitest/rg'
 require 'pry-byebug'
 require '../song'
-require 'rspotify'	
 
 
 class TestSong < Minitest::Test
