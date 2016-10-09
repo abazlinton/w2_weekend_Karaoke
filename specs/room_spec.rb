@@ -82,6 +82,7 @@ class TestRoom < Minitest::Test
 		Array @guests_count_8 = @guests_count_2 * 4
 		result = @room.add_guests(@guests_count_8)
 		assert_equal("FULL", result)
+		#This isn't actually FULL :S rather, not enough space for all
 	end
 
 	def test_can_get_total_cash
